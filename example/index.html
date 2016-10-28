@@ -22,23 +22,20 @@
 
 		<script>
 
-		window.addEventListener('load', function () {
+		BackboneComponents.import('test-view.html')
+			.then(function () {
 
-			BackboneComponents.import('test-view.html')
-				.then(function () {
-
-					var testView = new TestView({
-						el: document.querySelector('#container')
-					});
-
-					testView.render();
-					
-				})
-				.catch(function (reason) {
-					console.error(reason);
+				var testView = new TestView({
+					el: document.querySelector('#container')
 				});
 
-		});
+				testView.render();
+				
+			})
+			.catch(function (reason) {
+				console.error(reason);
+			});
+
 		</script>
 	</body>
 </html>
