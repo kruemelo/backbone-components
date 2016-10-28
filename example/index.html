@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" /> 
+	  <title>backbone-components example</title>
+	</head>
+	<body>
+
+		<div id="container"></div>
+
+		<!-- 
+		load dependencies
+	 	-->
+		<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+		<script src="../node_modules/underscore/underscore-min.js"></script>
+		<script src="../node_modules/backbone/backbone-min.js"></script>
+
+		<!-- ff requries web components polyfill to import -->
+		<script src="../node_modules/webcomponents/webcomponents-lite.min.js"></script>
+
+		<script src="../backbone-components.js"></script>
+
+		<script>
+
+		window.addEventListener('load', function () {
+
+			BackboneComponents.import('test-view.html')
+				.then(function () {
+
+					var testView = new TestView({
+						el: document.querySelector('#container')
+					});
+
+					testView.render();
+					
+				})
+				.catch(function (reason) {
+					console.error(reason);
+				});
+
+		});
+		</script>
+	</body>
+</html>
