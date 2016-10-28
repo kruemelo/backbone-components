@@ -21,7 +21,7 @@ BackboneComponents.import('test-view.html')
 
 ```
 
-test-component.html:
+component file `test-view.html`:
 
 ```html
 <backbone-component name="TestView">
