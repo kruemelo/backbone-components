@@ -2,6 +2,10 @@
   "name": "backbone-components",
   "version": "0.0.1",
   "description": "use backbone views like webcomponents",
+  "keywords": [
+    "backbone",
+    "webcomponents"
+  ],
   "author": "kruemelo",
   "license": "MIT",
   "scripts": {
