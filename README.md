@@ -26,33 +26,10 @@ test-component.html:
 ```html
 <backbone-component name="TestView">
 
-	<!-- 
-	you may load additional scripts:
-
-	<script src="additional-script.js"></script> 
-	-->
-
-	<!-- optional: some css -->
-	<style type="text/css-template">
-
-	.test-view>h1 {
-		color: red;
-	}
-
-	</style>
-
-
 	<!-- optional: html templates -->
 	<script type="text/html-template">
 
-		<!-- script tags are not allowed here!
-			<script type="text/javascript">
-				console.log('foo');
-			</script>
-	 	-->
-
  		<template id="test">
-
  			<div class="test-view">
 				<button class="btn-clickme">clickme</button>
 				<h1>says <%-say %> </h1> 			
