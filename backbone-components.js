@@ -74,7 +74,7 @@ license: MIT (http://opensource.org/licenses/mit-license.php)
       
       link.rel = 'import';
       link.href = url;
-      link.async = true;
+      link.setAttribute('async', true);
 
       link.onload = function () {
         resolve(this.import);
