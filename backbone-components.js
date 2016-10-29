@@ -53,6 +53,7 @@ license: MIT (http://opensource.org/licenses/mit-license.php)
     var extended = baseComponent.extend(component);
 
     extended.prototype.super = baseComponent;
+    extended.prototype.class = extended;
 
     return extended;
   };
@@ -181,20 +182,20 @@ license: MIT (http://opensource.org/licenses/mit-license.php)
 
             var component = BackboneComponents.registeredComponents[componentName];
 
-              // add templates
-              component.class.templates = {}; 
+            // add templates
+            component.class.templates = {}; 
 
-              templateScriptNodes.forEach(function (templateNode) {
-                component.class.templates[templateNode.id] = _.template(templateNode.innerHTML);
-              });
+            templateScriptNodes.forEach(function (templateNode) {
+              component.class.templates[templateNode.id] = _.template(templateNode.innerHTML);
+            });
 
-              if (componentStyleNode) {
-                styleNode = document.createElement('style');
-                styleNode.innerHTML = componentStyleNode.innerHTML;
-                document.head.appendChild(styleNode);
-              }
+            if (componentStyleNode) {
+              styleNode = document.createElement('style');
+              styleNode.innerHTML = componentStyleNode.innerHTML;
+              document.head.appendChild(styleNode);
+            }
 
-              resolve();
+            resolve();
 
           })
           .catch(reject);
