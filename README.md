@@ -27,15 +27,11 @@ component file `test-view.html`:
 <backbone-component name="TestView">
 
 	<!-- optional: html templates -->
-	<script type="text/html-template">
-
- 		<template id="test">
+	<script type="text/html-template" id="test">
  			<div class="test-view">
 				<button class="btn-clickme">clickme</button>
 				<h1>says <%-say %> </h1> 			
 			</div>
- 		</template>
-
 	</script>
 
 
@@ -47,17 +43,13 @@ component file `test-view.html`:
 		// define backbone view
 		var TestView = 	BackboneComponents.extend({
 
-		  events: {
-		    'click .btn-clickme': 'close'
-		  },
+		  events: {'click .btn-clickme': 'close'},
 
 		  render: function () {
 
 		    this.$el.html(
 	    		TestView.templates.test.render({say: 'hi!'})
 	    	);
-
-	    	return this;
 		  }
 		});
 
@@ -65,7 +57,6 @@ component file `test-view.html`:
 		BackboneComponents.register('TestView', TestView);
 
 	}());
-
 	</script>
 
 </backbone-component>

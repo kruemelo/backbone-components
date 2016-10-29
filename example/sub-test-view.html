@@ -1,71 +1,68 @@
 <backbone-component name="SubTestView">
 
-	<!-- 
-	you may load additional scripts:
+  <!-- 
+  you may load additional scripts:
 
-	<script src="additional-script.js"></script> 
-	-->
+  <script src="additional-script.js"></script> 
+  -->
 
-	<!-- optional: some css -->
-	<style type="text/css-template">
+  <!-- optional: some css -->
+  <style type="text/css-template">
 
-	.sub-test-view>h1 {
-		color: blue;
-	}
+  .sub-test-view>h1 {
+    color: blue;
+  }
 
-	</style>
+  </style>
 
 
-	<!-- optional: html templates -->
-	<script type="text/html-template">
+  <!-- optional: html templates -->
+  <script type="text/html-template" id="test">
 
-		<!-- script tags are not allowed here!
-			<script type="text/javascript">
-				console.log('foo');
-			</script>
-	 	-->
+    <!-- script tags are not allowed here!
+      <script type="text/javascript">
+        console.log('foo');
+      </script>
+    -->
 
- 		<template id="test">
-			
-			<div class="sub-test-view">
-				<h1>answer: <%-answer %>! </h1> 			
-				<button class="btn-clickme">&times;</button>
-			</div>
+    <div class="sub-test-view">
+      <h1>answer: <%-answer %>! </h1>       
+      <button class="btn-clickme">&times;</button>
+    </div>
 
- 		</template>
-	</script>
+  </script>
 
-	<!-- mandatory: backbone view definition -->
-	<script type="text/javascript">
+  <!-- mandatory: backbone view definition -->
+  <script type="text/javascript">
 
-	(function () {
+  (function () {
 
-			// define backbone view
-			var SubTestView = BackboneComponents.extend({
+      // define backbone view
+      var SubTestView = BackboneComponents.extend({
 
-			  events: {
-			    'click .btn-clickme': 'close'
-			  },
+        events: {
+          'click .btn-clickme': 'close'
+        },
 
-			  buttonClicked: function () {
-			  	this.close();
-			  },
+        buttonClicked: function () {
+          this.close();
+        },
 
-			  render: function () {
+        render: function () {
 
-			    this.$el.html(
-		    		SubTestView.templates.test.render({answer: 43})
-		    	);
+          this.$el.html(
+            SubTestView.templates.test.render({answer: 43})
+          );
 
-		    	return this;
-			  }
-			});
+          return this;
+        }
+      });
 
-			// register view
-			BackboneComponents.register('SubTestView', SubTestView);
+      // register view
+      BackboneComponents.register('SubTestView', SubTestView);
 
-	}());
+  }());
 
-	</script>
+  </script>
 
 </backbone-component>

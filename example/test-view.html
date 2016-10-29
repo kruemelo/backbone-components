@@ -17,7 +17,7 @@
 
 
 	<!-- optional: html templates -->
-	<script type="text/html-template">
+	<script type="text/html-template" id="test">
 
 		<!-- script tags are not allowed here!
 			<script type="text/javascript">
@@ -25,70 +25,65 @@
 			</script>
 	 	-->
 
- 		<template id="test">
+		<div class="test-view">
 
- 			<div class="test-view">
+			<button class="btn-clickme">clickme</button>
+			
+			<h1>says <%-say %> </h1> 			
 
-				<button class="btn-clickme">clickme</button>
-				
-				<h1>says <%-say %> </h1> 			
+			<ul class="answers"></ul>
 
-				<ul class="answers"></ul>
+		</div>
 
-			</div>
-
- 		</template>
 	</script>
 
 
 	<!-- mandatory: backbone view definition -->
 	<script type="text/javascript">
 
+		// define backbone view
+		var TestView = 	BackboneComponents.extend({
+
+		  events: {
+		    'click .btn-clickme': 'buttonClicked'
+		  },
+
+
+		  buttonClicked: function () {
+
+		  	var subTestView = new SubTestView(),
+		  		newLi = document.createElement('li');
+
+		  	this.$('.answers').append(newLi);
+
+		  	subTestView.setElement(newLi);
+
+		  	subTestView.render();
+		  	
+		  },
+
+
+		  initialize: function () {
+
+		  	// BackboneComponents.BaseView.prototype.initialize.apply(this, arguments);
+		  	this.super.prototype.initialize.apply(this, arguments);
+		  },
+
+
+		  render: function () {
+
+		    this.$el.html(
+	    		TestView.templates.test.render({say: 'hi!'})
+	    	);
+
+	    	return this;
+		  }
+		});
+
+
 		// load dependencies 
 		BackboneComponents.import('sub-test-view.html')
 			.then(function () {
-
-				// dependency `SubTestView` will be available in TestView, but may not yet be at this point
-				// console.log(SubTestView);
-
-				// define backbone view
-				var TestView = 	BackboneComponents.extend({
-
-				  events: {
-				    'click .btn-clickme': 'buttonClicked'
-				  },
-
-
-				  buttonClicked: function () {
-
-				  	var subTestView = new SubTestView(),
-				  		newLi = document.createElement('li');
-
-				  	this.$('.answers').append(newLi);
-
-				  	subTestView.setElement(newLi);
-
-				  	subTestView.render();
-				  	
-				  },
-
-
-				  initialize: function () {
-
-				  	// BackboneComponents.BaseView.prototype.initialize.apply(this, arguments);
-				  	this.super.prototype.initialize.apply(this, arguments);
-				  },
-
-
-				  render: function () {
-
-				    this.$el.html(
-			    		TestView.templates.test.render({say: 'hi!'})
-			    	);
-
-			    	return this;
-				  }
-				});
 
 				// register view
 				BackboneComponents.register('TestView', TestView);

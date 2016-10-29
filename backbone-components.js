@@ -65,41 +65,6 @@ license: MIT (http://opensource.org/licenses/mit-license.php)
   BackboneComponents.timeout = 30000;
 
 
-  // parse template tags from dom
-  BackboneComponents.parseTemplates = function (html) {
-
-    var templates = {},
-      pattern = '<t' + 'emplate(?:.*)id="(.*?)"(?:.*)>',
-      templateOpenTagRegExp = new RegExp(pattern, 'g'),
-      tagContentRegExp,
-      match,
-      openTag,
-      templateId;
-      
-    while ((match = templateOpenTagRegExp.exec(html)) !== null) {
-      
-      openTag = match[0];
-      
-      templateId = match[1];
-      tagContentRegExp = new RegExp(openTag + '([\\s\\S]*?)</t' + 'emplate>', 'g');
-
-      if ((match = tagContentRegExp.exec(html)) !== null) {
-        templates[templateId] = _.template(match[1]);
-      }
-    } 
-    
-    _.each(templates, function (template) {
-      Object.defineProperty(template, 'render', {
-        value: function (renderArgs) { 
-            return template(renderArgs); 
-          }
-      });
-    });
-
-    return templates;
-  };
-
-
   BackboneComponents.addLink = function (url) {
 
     return new Promise (function (resolve, reject) {
@@ -189,7 +154,7 @@ license: MIT (http://opensource.org/licenses/mit-license.php)
 
         var componentNode,
           componentName,
-          templateScriptNode,
+          templateScriptNodes,
           componentStyleNode,
           styleNode;
 
@@ -207,7 +172,7 @@ license: MIT (http://opensource.org/licenses/mit-license.php)
 
         BackboneComponents.pendingUrls[url] = componentName;
 
-        templateScriptNode = componentNode.querySelector('script[type="text/html-template"]');
+        templateScriptNodes = componentNode.querySelectorAll('script[type="text/html-template"]');
 
         componentStyleNode = componentNode.querySelector('style[type="text/css-template"]');
         
@@ -217,8 +182,17 @@ license: MIT (http://opensource.org/licenses/mit-license.php)
             var component = BackboneComponents.registeredComponents[componentName];
 
               // add templates
-              component.class.templates = templateScriptNode ?
-                BackboneComponents.parseTemplates(templateScriptNode.innerHTML) : {};
+              component.class.templates = {}; 
+
+              _.each(templateScriptNodes, function (templateNode) {
+                var template = _.template(templateNode.innerHTML);
+                Object.defineProperty(template, 'render', {
+                  value: function (renderArgs) { 
+                      return template(renderArgs); 
+                    }
+                });
+                component.class.templates[templateNode.id] = template;
+              });
 
               if (componentStyleNode) {
                 styleNode = document.createElement('style');
