@@ -1,6 +1,6 @@
 {
   "name": "backbone-components",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "use backbone views like webcomponents",
   "keywords": [
     "backbone",
@@ -8,6 +8,10 @@
   ],
   "author": "kruemelo",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kruemelo/backbone-components.git"
+  },
   "scripts": {
     "static-server": "node ./static-server.js"
   },

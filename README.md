@@ -48,7 +48,7 @@ component file `test-view.html`:
 		  render: function () {
 
 		    this.$el.html(
-	    		TestView.templates.test.render({say: 'hi!'})
+	    		TestView.templates.test({say: 'hi!'})
 	    	);
 		  }
 		});
