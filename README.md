@@ -9,15 +9,15 @@ index.html:
 ```js
 
 BackboneComponents.import('test-view.html')
-	.then(function () {
+  .then(function () {
 
-		var testView = new TestView({
-			el: document.querySelector('#container')
-		});
+    var testView = new TestView({
+      el: document.querySelector('#container')
+    });
 
-		testView.render();
-		
-	});
+    testView.render();
+    
+  });
 
 ```
 
@@ -26,42 +26,55 @@ component file `test-view.html`:
 ```html
 <backbone-component name="TestView">
 
-	<!-- optional: html templates -->
-	<script type="text/html-template" id="test">
- 			<div class="test-view">
-				<button class="btn-clickme">clickme</button>
-				<h1>says <%-say %> </h1> 			
-			</div>
-	</script>
+  <!-- html templates -->
 
+  <script type="text/html-template" id="main">
+    <div class="test-view">
+      <button class="btn-clickme">clickme</button>
+      <h1>says <%-say %> </h1>      
+    </div>
+  </script>
 
-	<!-- mandatory: backbone view definition -->
-	<script type="text/javascript">
+  <script type="text/html-template" id="other">
+      <h2>other content</h2>
+  </script>
 
-	(function () {
+  <!-- backbone view definition -->
+  <script type="text/javascript">
 
-		// define backbone view
-		var TestView = 	BackboneComponents.extend({
+  (function () {
 
-		  events: {'click .btn-clickme': 'close'},
+    // define backbone view
+    var TestView =  BackboneComponents.extend({
 
-		  render: function () {
+      events: {
+        'click .btn-clickme': function () {
+          this.$('.test-view').append(TestView.templates.other());
+        }
+      },
 
-		    this.$el.html(
-	    		TestView.templates.test({say: 'hi!'})
-	    	);
-		  }
-		});
+      render: function () {
+        this.$el.html(
+          TestView.templates.main({say: 'hi!'})
+        );
+      }
+    });
 
-		// register view
-		BackboneComponents.register('TestView', TestView);
+    // register view
+    BackboneComponents.register('TestView', TestView);
 
-	}());
-	</script>
+  }());
+  </script>
 
 </backbone-component>
 
 ```
+
+- supports nested components
+- easily define multiple templates for a component 
+- handles dependencies for you
+- lets you define css styles 
+- all in one file!
 
 also see `example` folder for more examples.
 
