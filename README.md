@@ -71,7 +71,7 @@ component file `test-view.html`:
 ```
 
 - supports nested components
-- easily define multiple templates for a component 
+- easily define multiple [html templates](http://underscorejs.org/#template) for a component 
 - handles dependencies for you
 - lets you define css styles 
 - all in one file!

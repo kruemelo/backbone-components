@@ -185,7 +185,7 @@ license: MIT (http://opensource.org/licenses/mit-license.php)
             // add templates
             component.class.templates = {}; 
 
-            templateScriptNodes.forEach(function (templateNode) {
+            _.each(templateScriptNodes, function (templateNode) {
               component.class.templates[templateNode.id] = _.template(templateNode.innerHTML);
             });
 
