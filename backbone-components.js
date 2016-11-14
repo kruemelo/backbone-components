@@ -53,7 +53,6 @@ license: MIT (http://opensource.org/licenses/mit-license.php)
     var extended = baseComponent.extend(component);
 
     extended.prototype.super = baseComponent;
-    extended.prototype.class = extended;
 
     return extended;
   };
