@@ -111,7 +111,7 @@ license: MIT (http://opensource.org/licenses/mit-license.php)
 
       // wait for class loaded completely
       var waitInterval,
-        intervalLenght = 20,
+        intervalLength = 20,
         registered = false;
 
       // wait for component
@@ -124,7 +124,7 @@ license: MIT (http://opensource.org/licenses/mit-license.php)
             component.url = url;
             resolve();
         }
-      }, intervalLenght);        
+      }, intervalLength);        
 
       if (timeout) {
         setTimeout(function () {
@@ -183,6 +183,14 @@ license: MIT (http://opensource.org/licenses/mit-license.php)
 
             // add templates
             component.class.templates = {}; 
+
+            // add component raw string
+            // access: BackboneComponents.registeredComponents.<ViewName>.raw
+            component.raw = componentNode.outerHTML;
+
+            component.name = componentName;
+            component.templateScriptNodes = templateScriptNodes;
+            component.styleNode = componentStyleNode;
 
             _.each(templateScriptNodes, function (templateNode) {
               component.class.templates[templateNode.id] = _.template(templateNode.innerHTML);
